@@ -1,0 +1,43 @@
+
+
+* {
+    text-decoration: none;
+}
+
+nav {
+    font-family: 'Poppins', sans-serif;
+    padding-left: 30px;
+    padding-right: 30px; 
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+li {
+    list-style: none;
+    display: inline-block;
+    font-size: 15px;
+}
+
+li a {
+    color: black;
+    margin-right: 15px;
+}
+
+.btn {
+    margin-left: 5px;
+    padding: 8px;
+    color: white;
+    background: #FF0000;
+    border-radius: 5px;
+    width: 80px;
+}
+
+.logo a{
+    font-size: 25px;
+    font-weight: 600;
+    color: #FF0000;
+}
