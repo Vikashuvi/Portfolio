@@ -195,3 +195,57 @@ span {
     font-weight: 600;
     font-size: medium;
 }
+
+.prj {
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 1200px; 
+    margin-left: 350px;
+    margin-bottom: 120px;
+}
+
+.slider {
+    flex: 1;
+    max-width: 500px; 
+    position: relative;
+    margin-top: -70px;
+  }
+  
+  .slides {
+    display: flex;
+  }
+  
+  .slides img {
+    width: 100%;
+    display: none;
+    border-radius: 25px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+  }
+  
+  .slides img:first-child {
+    display: block;
+  }
+  
+  .slider button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(10%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 40px;
+  }
+  
+  .prev {
+    left: -75px;
+  }
+  
+  .next {
+    right: -75px;
+  }
