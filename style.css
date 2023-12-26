@@ -206,7 +206,7 @@ span {
     align-items: flex-start;
     max-width: 1200px; 
     margin-left: 350px;
-    margin-bottom: 120px;
+    margin-bottom: 100px;
 }
 
 .slider {
@@ -214,25 +214,25 @@ span {
     max-width: 500px; 
     position: relative;
     margin-top: -70px;
-  }
+}
   
-  .slides {
+.slides {
     display: flex;
-  }
+}
   
-  .slides img {
+.slides img {
     width: 100%;
     display: none;
     border-radius: 25px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.08);
     cursor: pointer;
-  }
+}
   
-  .slides img:first-child {
+.slides img:first-child {
     display: block;
-  }
+}
   
-  .slider button {
+.slider button {
     position: absolute;
     top: 50%;
     transform: translateY(10%);
@@ -240,12 +240,76 @@ span {
     border: none;
     cursor: pointer;
     font-size: 40px;
-  }
+}
   
-  .prev {
+.prev {
     left: -75px;
-  }
+}
   
-  .next {
+.next {
     right: -75px;
-  }
+}
+
+footer {
+    padding: 8vw;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-bottom: 85px;
+}
+
+
+footer .footer-col {
+    padding-bottom: 0px;
+    margin-left: 600px;
+}
+
+footer p {
+    color: #7b838a;
+}
+
+footer .subscribe {
+    margin-top: 0px;
+}
+
+footer input{
+    width: 220px;
+    padding: 15px 12px;
+    background: #ffffff;
+    border: none;
+    outline: none;
+    color: rgb(0, 0, 0);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.08);
+    border-radius: 8PX;
+}
+
+footer .subscribe a {
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 15px 20px;
+    background-color: white;
+    font-weight: 600;
+    border-radius: 8PX;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.08);
+}   
+
+footer .subscribe a.yellow{
+    color: white;
+    background: #fdc93b;
+    transition: 0.3 ease;
+}
+    
+footer .subscribe a.yellow:hover{
+    color: rgba(21,21,100);
+    background: white;
+}
+
+footer .copyright {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    flex-wrap: wrap;
+}
