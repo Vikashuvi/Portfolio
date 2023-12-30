@@ -258,6 +258,7 @@ footer {
     align-items: flex-start;
     flex-wrap: wrap;
     margin-bottom: 85px;
+    margin-top: 150px;
 }
 
 
@@ -312,4 +313,19 @@ footer .copyright {
     align-items: center;
     width: 100%;
     flex-wrap: wrap;
+}
+
+.ico {
+    display: flex;
+    align-items: center;
+    margin-left: -575px;
+    margin-bottom: -150px;
+}
+
+.ico a {
+    text-decoration: none;
+}
+
+.ico i {
+    font-size: 75px;
 }
