@@ -5,6 +5,21 @@
     font-family: 'Poppins', sans-serif;
 }
 
+* h1 {
+    position: relative;
+    display: inline-block;
+}
+
+* h1::after {
+    content: '';
+    position: absolute;
+    bottom: -5px; 
+    left: 0;
+    width: 100%; 
+    border-bottom: 4px solid #ff0000;
+    border-radius: 5px; 
+}
+
 nav {
     font-family: 'Poppins', sans-serif;
     padding-left: 30px;
@@ -15,6 +30,31 @@ nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.navbar ul li a {
+    position: relative;
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    letter-spacing: 0.5px;
+    padding: 0 5px;
+}
+
+.navbar ul li a:after {
+    content: "";
+    position: absolute;
+    background-color: #FF0000;
+    height: 3px;
+    width: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -10px;
+    transition: 0.3s ease-in-out;
+}
+
+.navbar ul li a:hover:after {
+    width: 100%;
 }
 
 li {
@@ -41,10 +81,23 @@ li a {
 }
 
 .logo a{
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 600;
-    color: #FF0000;
+    color: #000000;
+    position: relative;
+    display: inline-block;
 }
+
+.logo a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px; 
+    left: 0;
+    width: 100%; 
+    border-bottom: 4px solid #ff0000;
+    border-radius: 5px; 
+}
+
 
 .hero {
     display: flex;
@@ -86,8 +139,9 @@ li a {
 }
 
 .info h1 {
-    color: #FF0000;
+    color: #000000;
 }
+
 
 .abt-img {
     margin-top: -60px;
@@ -298,12 +352,12 @@ footer .subscribe a {
 
 footer .subscribe a.yellow{
     color: white;
-    background: #fdc93b;
+    background: #ff0000;
     transition: 0.3 ease;
 }
     
 footer .subscribe a.yellow:hover{
-    color: rgba(21,21,100);
+    color: #FF0000;
     background: white;
 }
 
@@ -328,4 +382,20 @@ footer .copyright {
 
 .ico i {
     font-size: 75px;
+}
+
+.touch {
+    position: relative;
+    display: inline-block;
+}
+
+.touch::after {
+    content: '';
+    position: absolute;
+    bottom: -5px; 
+    left: 0;
+    width: 100%; 
+    border-bottom: 4px solid #ff0000;
+    border-radius: 5px; 
+
 }
