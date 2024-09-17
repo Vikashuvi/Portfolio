@@ -25,7 +25,12 @@ const About = () => {
           
           <button 
             className="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition-colors flex items-center gap-2 shadow-md"
-            onClick={() => {/* Add your download logic here */}}
+            onClick={() => {
+              const link = document.createElement('a');
+              link.href = '/resume.pdf'; // Assuming your file is named 'resume.pdf'
+              link.download = 'Vikash_Resume.pdf';
+              link.click();
+            }}
           >
             Download Resume
             <Download size={18} />

@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import Portfolio from './pages/Portfolio';
 import About from './pages/About';
 import Skills from './pages/Skills';
+import Projects from './pages/Projects';
+import Experience from './pages/Experience';
+import Contact from './pages/Contact';
+import 'react-vertical-timeline-component/style.min.css';
+
 function App() {
   const [isDarkTheme, setIsDarkTheme] = useState(true);
 
@@ -19,9 +24,22 @@ function App() {
       
       <div className="relative z-10">
         <Portfolio toggleTheme={toggleTheme} isDarkTheme={isDarkTheme} />
-        <About />
-        <Skills/>
-      
+        
+        <section id="about">
+          <About />
+        </section>
+        <section id="skills">
+          <Skills />
+        </section>
+        <section id="projects">
+          <Projects />
+        </section>
+        <section id="experience">
+          <Experience />
+        </section>
+        <section id="contact">
+          <Contact />
+        </section>
       </div>
     </div>
   );
