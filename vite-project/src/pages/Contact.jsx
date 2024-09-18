@@ -4,13 +4,6 @@ import { SiBehance, SiDribbble } from 'react-icons/si';
 
 const Contact = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
 
   useEffect(() => {
@@ -37,35 +30,35 @@ const Contact = () => {
   const iconStyle = "text-xl text-black dark:text-white";
   const socialIconStyle = "text-3xl text-black dark:text-white hover:text-blue-500 dark:hover:text-blue-400 transition-colors duration-300";
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitMessage('');
+    formData.append("access_key", "3bcf415d-16b8-4357-b41f-c4ee9308b926");
+
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
 
     try {
-      const response = await fetch('http://localhost:3001/api/send-email', {
-        method: 'POST',
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
+          Accept: "application/json"
         },
-        body: JSON.stringify(formData),
-      });
+        body: json
+      }).then((res) => res.json());
 
-      if (response.ok) {
+      if (res.success) {
+        console.log("Success", res);
         setSubmitMessage('Message sent successfully!');
-        setFormData({ name: '', email: '', subject: '', message: '' });
+        event.target.reset();
       } else {
         setSubmitMessage('Failed to send message. Please try again.');
       }
     } catch (error) {
       console.error('Error:', error);
       setSubmitMessage('An error occurred. Please try again later.');
-    } finally {
-      setIsSubmitting(false);
     }
   };
 
@@ -76,14 +69,11 @@ const Contact = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="md:col-span-2" style={{...glassmorphicStyle, padding: '20px'}}>
             <h3 className="text-lg font-semibold mb-3">Send Me a Message</h3>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={onSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
                 <input 
                   type="text" 
-                  id="name" 
                   name="name" 
-                  value={formData.name}
-                  onChange={handleChange}
                   placeholder="Name" 
                   className="w-full p-2 text-sm rounded" 
                   style={glassmorphicStyle} 
@@ -91,10 +81,7 @@ const Contact = () => {
                 />
                 <input 
                   type="email" 
-                  id="email" 
                   name="email" 
-                  value={formData.email}
-                  onChange={handleChange}
                   placeholder="Email" 
                   className="w-full p-2 text-sm rounded" 
                   style={glassmorphicStyle} 
@@ -104,10 +91,7 @@ const Contact = () => {
               <div className="mb-3">
                 <input 
                   type="text" 
-                  id="subject" 
                   name="subject" 
-                  value={formData.subject}
-                  onChange={handleChange}
                   placeholder="Subject" 
                   className="w-full p-2 text-sm rounded" 
                   style={glassmorphicStyle} 
@@ -116,10 +100,7 @@ const Contact = () => {
               </div>
               <div className="mb-3">
                 <textarea 
-                  id="message" 
                   name="message" 
-                  value={formData.message}
-                  onChange={handleChange}
                   rows="4" 
                   placeholder="Message" 
                   className="w-full p-2 text-sm rounded" 
@@ -130,9 +111,8 @@ const Contact = () => {
               <button 
                 type="submit" 
                 className="bg-blue-500 text-white px-4 py-2 text-sm rounded hover:bg-blue-600 transition-colors"
-                disabled={isSubmitting}
               >
-                {isSubmitting ? 'Sending...' : 'Send Message'}
+                Send Message
               </button>
               {submitMessage && (
                 <p className={`mt-2 ${submitMessage.includes('successfully') ? 'text-green-500' : 'text-red-500'}`}>
