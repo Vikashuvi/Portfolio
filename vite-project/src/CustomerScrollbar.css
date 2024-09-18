@@ -1,0 +1,58 @@
+/* Custom Scrollbar Styles */
+::-webkit-scrollbar {
+    width: 5px;  /* Make the scrollbar thinner */
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;  /* Make the track transparent */
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);  /* Semi-transparent white */
+    border-radius: 2.5px;  /* Slightly rounded corners */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);  /* Slightly more opaque on hover */
+}
+
+/* For Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+
+/* For dark mode */
+.dark-theme ::-webkit-scrollbar-track {
+    background: #1e293b; /* Tailwind's gray-800 */
+}
+
+.dark-theme ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);  /* Keep it the same for dark mode */
+}
+
+.dark-theme ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);  /* Keep it the same for dark mode */
+}
+
+.dark-theme * {
+    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+
+html::-webkit-scrollbar {
+    width: 5px;
+}
+
+html::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+html::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2.5px;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+}

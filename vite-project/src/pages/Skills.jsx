@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Marquee from 'react-fast-marquee';
+import { motion, useAnimation } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 
 const Skills = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -42,9 +44,51 @@ const Skills = () => {
     boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)'
   };
 
+  const controls = useAnimation();
+  const [ref, inView] = useInView({
+    threshold: 0.1,
+    triggerOnce: true,
+  });
+
+  useEffect(() => {
+    if (inView) {
+      controls.start('visible');
+    }
+  }, [controls, inView]);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        delayChildren: 0.3,
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1
+    }
+  };
+
   return (
-    <section className="container mx-auto px-4 py-16 relative z-10">
-      <h1 className={`text-4xl font-bold mb-12 text-center text-ellipsis`}>Skills</h1>
+    <motion.section
+      ref={ref}
+      animate={controls}
+      initial="hidden"
+      variants={containerVariants}
+      className="container mx-auto px-4 py-16 relative z-10"
+    >
+      <motion.h1 
+        variants={itemVariants}
+        className={`text-4xl font-bold mb-12 text-center text-ellipsis`}
+      >
+        Skills
+      </motion.h1>
       <Marquee 
         gradient={false} 
         speed={40} 
@@ -55,7 +99,11 @@ const Skills = () => {
         direction="left"
       >
         {skills.map((skill, index) => (
-          <div key={index} className="mx-4 mb-8 py-6">
+          <motion.div 
+            key={index} 
+            className="mx-4 mb-8 py-6"
+            variants={itemVariants}
+          >
             <div
               className={`w-32 h-32 flex flex-col items-center justify-center p-4 rounded-xl transition-all duration-300 transform hover:scale-110 origin-center`}
               style={{
@@ -74,10 +122,10 @@ const Skills = () => {
                 {skill.name}
               </p>
             </div>
-          </div>
+          </motion.div>
         ))}
       </Marquee>
-    </section>
+    </motion.section>
   );
 };
 

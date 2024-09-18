@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { motion, useAnimation } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 import airesume from "../assets/airesume.png";
 import hallbooking from "../assets/hallbooking.png";
 import wow from "../assets/wow.png";
@@ -82,9 +84,14 @@ const technologyIcons = {
   // Add more technology icons as needed
 };
 
-const ProjectCard = ({ project, setOpenModal }) => {
+const ProjectCard = ({ project, setOpenModal, index }) => {
   return (
-    <div className="backdrop-filter backdrop-blur-lg bg-white bg-opacity-10 dark:bg-gray-800 dark:bg-opacity-10 rounded-lg shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700 transition duration-300 hover:shadow-xl">
+    <motion.div 
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="backdrop-filter backdrop-blur-lg bg-white bg-opacity-10 dark:bg-gray-800 dark:bg-opacity-10 rounded-lg shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700 transition duration-300 hover:shadow-xl"
+    >
       <img src={project.image} alt={project.title} className="w-full h-48 object-cover" />
       <div className="p-4">
         <h3 className="text-lg font-semibold text-black dark:text-white mb-3">{project.title}</h3>
@@ -119,7 +126,7 @@ const ProjectCard = ({ project, setOpenModal }) => {
           </button>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
@@ -133,12 +140,53 @@ const Projects = () => {
     setModalContent(null);
   };
 
+  const controls = useAnimation();
+  const [ref, inView] = useInView({
+    threshold: 0.1,
+    triggerOnce: true,
+  });
+
+  useEffect(() => {
+    if (inView) {
+      controls.start('visible');
+    }
+  }, [controls, inView]);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        delayChildren: 0.3,
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1
+    }
+  };
+
   return (
-    <div id="projects" className="py-16">
+    <motion.div
+      ref={ref}
+      animate={controls}
+      initial="hidden"
+      variants={containerVariants}
+      id="projects" 
+      className="py-16"
+    >
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-center text-black dark:text-white mb-4">
+        <motion.h2 
+          variants={itemVariants}
+          className="text-3xl md:text-4xl font-bold text-center text-black dark:text-white mb-4"
+        >
           Projects
-        </h2>
+        </motion.h2>
         
         <div className="flex justify-center mb-8">
           <div className="inline-flex rounded-md shadow-sm" role="group">
@@ -170,12 +218,17 @@ const Projects = () => {
         } gap-8`}>
           {projects
             .filter((project) => project.category === toggle)
-            .map((project) => (
-              <ProjectCard 
+            .map((project, index) => (
+              <motion.div
                 key={project.id}
-                project={project}
-                setOpenModal={setModalContent}
-              />
+                variants={itemVariants}
+              >
+                <ProjectCard 
+                  project={project}
+                  setOpenModal={setModalContent}
+                  index={index}
+                />
+              </motion.div>
             ))}
         </div>
 
@@ -207,7 +260,7 @@ const Projects = () => {
           </div>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

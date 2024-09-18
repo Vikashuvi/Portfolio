@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
+import { motion, useAnimation } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 import 'react-vertical-timeline-component/style.min.css';
 // Import your logo images
 import TechCorpLogo from '../assets/gdsc.png';
@@ -53,13 +55,54 @@ const ExperienceContent = () => {
     borderRadius: '50%',
   };
 
+  const controls = useAnimation();
+  const [ref, inView] = useInView({
+    threshold: 0.1,
+    triggerOnce: true,
+  });
+
+  useEffect(() => {
+    if (inView) {
+      controls.start('visible');
+    }
+  }, [controls, inView]);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        delayChildren: 0.3,
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1
+    }
+  };
+
   return (
-    <section id="experience" className="py-16">
+    <motion.section
+      ref={ref}
+      animate={controls}
+      initial="hidden"
+      variants={containerVariants}
+      id="experience" 
+      className="py-16"
+    >
       <div className="container mx-auto px-4">
-        <h2 className={`text-3xl md:text-4xl font-bold text-center text-ellipsis mb-8`}>
+        <motion.h2 
+          variants={itemVariants}
+          className={`text-3xl md:text-4xl font-bold text-center text-ellipsis mb-8`}
+        >
           My Experience
-        </h2>
-        <div style={timelineStyle}>
+        </motion.h2>
+        <motion.div variants={itemVariants} style={timelineStyle}>
           <VerticalTimeline lineColor={greyColor}>
             <VerticalTimelineElement
               className="vertical-timeline-element--work"
@@ -130,9 +173,9 @@ const ExperienceContent = () => {
               </p>
             </VerticalTimelineElement>
           </VerticalTimeline>
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

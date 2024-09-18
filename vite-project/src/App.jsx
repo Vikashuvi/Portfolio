@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Portfolio from './pages/Portfolio';
 import About from './pages/About';
 import Skills from './pages/Skills';
@@ -6,9 +6,14 @@ import Projects from './pages/Projects';
 import Experience from './pages/Experience';
 import Contact from './pages/Contact';
 import 'react-vertical-timeline-component/style.min.css';
+import './CustomerScrollbar.css'; // Add this line
 
 function App() {
   const [isDarkTheme, setIsDarkTheme] = useState(true);
+
+  useEffect(() => {
+    document.body.classList.toggle('dark-theme', isDarkTheme);
+  }, [isDarkTheme]);
 
   const toggleTheme = () => {
     setIsDarkTheme(!isDarkTheme);
