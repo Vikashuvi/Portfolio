@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { motion, useAnimation } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
 import airesume from "../assets/airesume.png";
 import hallbooking from "../assets/hallbooking.png";
 import wow from "../assets/wow.png";
@@ -84,14 +82,9 @@ const technologyIcons = {
   // Add more technology icons as needed
 };
 
-const ProjectCard = ({ project, setOpenModal, index }) => {
+const ProjectCard = ({ project, setOpenModal }) => {
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="backdrop-filter backdrop-blur-lg bg-white bg-opacity-10 dark:bg-gray-800 dark:bg-opacity-10 rounded-lg shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700 transition duration-300 hover:shadow-xl"
-    >
+    <div className="backdrop-filter backdrop-blur-lg bg-white bg-opacity-10 dark:bg-gray-800 dark:bg-opacity-10 rounded-lg shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700 transition duration-300 hover:shadow-xl">
       <img src={project.image} alt={project.title} className="w-full h-48 object-cover" />
       <div className="p-4">
         <h3 className="text-lg font-semibold text-black dark:text-white mb-3">{project.title}</h3>
@@ -126,13 +119,14 @@ const ProjectCard = ({ project, setOpenModal, index }) => {
           </button>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
 const Projects = () => {
   const [toggle, setToggle] = useState('web development');
   const [modalContent, setModalContent] = useState(null);
+  const [filteredProjects, setFilteredProjects] = useState([]);
 
   const categories = ['web development', 'ux/ui design'];
 
@@ -140,53 +134,19 @@ const Projects = () => {
     setModalContent(null);
   };
 
-  const controls = useAnimation();
-  const [ref, inView] = useInView({
-    threshold: 0.1,
-    triggerOnce: true,
-  });
-
   useEffect(() => {
-    if (inView) {
-      controls.start('visible');
-    }
-  }, [controls, inView]);
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        delayChildren: 0.3,
-        staggerChildren: 0.2
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1
-    }
-  };
+    console.log('Toggle changed:', toggle);
+    const filtered = projects.filter((project) => project.category === toggle);
+    console.log('Filtered projects:', filtered);
+    setFilteredProjects(filtered);
+  }, [toggle]);
 
   return (
-    <motion.div
-      ref={ref}
-      animate={controls}
-      initial="hidden"
-      variants={containerVariants}
-      id="projects" 
-      className="py-16"
-    >
+    <div id="projects" className="py-16">
       <div className="container mx-auto px-4">
-        <motion.h2 
-          variants={itemVariants}
-          className="text-3xl md:text-4xl font-bold text-center text-black dark:text-white mb-4"
-        >
+        <h2 className="text-3xl md:text-4xl font-bold text-center text-black dark:text-white mb-4">
           Projects
-        </motion.h2>
+        </h2>
         
         <div className="flex justify-center mb-8">
           <div className="inline-flex rounded-md shadow-sm" role="group">
@@ -194,7 +154,10 @@ const Projects = () => {
               <button
                 key={category}
                 type="button"
-                onClick={() => setToggle(category)}
+                onClick={() => {
+                  console.log('Changing category to:', category);
+                  setToggle(category);
+                }}
                 className={`px-4 py-2 text-sm font-medium ${
                   toggle === category
                     ? 'bg-blue-600 text-white'
@@ -216,20 +179,17 @@ const Projects = () => {
             ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-2 justify-items-center' 
             : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
         } gap-8`}>
-          {projects
-            .filter((project) => project.category === toggle)
-            .map((project, index) => (
-              <motion.div
+          {filteredProjects.length > 0 ? (
+            filteredProjects.map((project, index) => (
+              <ProjectCard 
                 key={project.id}
-                variants={itemVariants}
-              >
-                <ProjectCard 
-                  project={project}
-                  setOpenModal={setModalContent}
-                  index={index}
-                />
-              </motion.div>
-            ))}
+                project={project}
+                setOpenModal={setModalContent}
+              />
+            ))
+          ) : (
+            <p className="text-center col-span-full text-white">No projects found for this category.</p>
+          )}
         </div>
 
         {modalContent && (
@@ -260,7 +220,7 @@ const Projects = () => {
           </div>
         )}
       </div>
-    </motion.div>
+    </div>
   );
 };
 
