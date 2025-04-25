@@ -17,8 +17,7 @@ const projects = [
     image: airesume,
     category: "web applications",
     technologies: ["React", "Tailwind", "Strapi", "OpenAI", "Clerk","Vite","NeonDB","JavaScript"],
-    githubUrl: "https://github.com/Vikashuvi/AI-Resume",
-    liveUrl: "https://ai-resume-builder.vercel.app/"
+    githubUrl: "https://github.com/Vikashuvi/AI-Resume"
   },
   {
     id: 2,
