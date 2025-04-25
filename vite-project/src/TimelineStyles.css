@@ -1,0 +1,49 @@
+/* Custom styles for the vertical timeline component */
+
+/* Base styles for all screen sizes */
+.vertical-timeline-element-icon {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+/* Mobile view styles */
+@media only screen and (max-width: 1169px) {
+  .vertical-timeline-element-icon {
+    width: 40px !important;
+    height: 40px !important;
+    left: 18px !important; /* Position the icon correctly on the timeline */
+    margin-left: -20px !important; /* Center the icon on the timeline */
+    top: 0 !important;
+    box-shadow: 0 0 0 4px white, inset 0 2px 0 rgba(0, 0, 0, 0.08), 0 3px 0 4px rgba(0, 0, 0, 0.05) !important;
+  }
+
+  .vertical-timeline::before {
+    left: 18px !important;
+  }
+
+  /* Fix the content positioning in mobile view */
+  .vertical-timeline-element-content {
+    margin-left: 40px !important;
+  }
+
+  /* Ensure the icon content is centered */
+  .vertical-timeline-element-icon > * {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+
+/* Desktop view styles */
+@media only screen and (min-width: 1170px) {
+  .vertical-timeline-element-icon {
+    width: 70px !important;
+    height: 70px !important;
+    left: 50% !important;
+    margin-left: -35px !important;
+    top: 0 !important;
+  }
+}

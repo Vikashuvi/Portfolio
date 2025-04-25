@@ -4,7 +4,8 @@ import hallbooking from "../assets/hallbooking.png";
 import wow from "../assets/wow.png";
 import rescue from "../assets/rescue.png";
 import boat from "../assets/boat.png";
-import { FaReact, FaNodeJs, FaPython, FaVuejs, FaFigma, FaRobot, FaHtml5, FaCss3Alt, FaJs, FaGithub } from 'react-icons/fa';
+import craft from "../assets/craft.png";
+import { FaReact, FaNodeJs, FaPython, FaVuejs, FaFigma, FaRobot, FaHtml5, FaCss3Alt, FaJs, FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import { SiTailwindcss, SiMongodb, SiExpress, SiFirebase, SiStrapi, SiOpenai, SiClerk, SiVite, SiPostgresql, SiVercel } from 'react-icons/si';
 
 // Updated projects data
@@ -14,29 +15,32 @@ const projects = [
     title: "AI Resume Builder",
     description: "Developed a sleek and intuitive resume builder web application with a strong emphasis on user experience and modern design. The front-end utilizes React, Vite.js, TailwindCSS, and Shadcn to create a polished and responsive interface. For a robust back-end, the app incorporates Clerk for user management, NeonDB for secure data storage, and Strapi as a headless CMS. It also leverages Axios for seamless API requests and the Gemini API for AI-driven enhancements. The builder achieves an ATS score of 60-70 and has been effectively used by my college mates for creating their own websites.",
     image: airesume,
-    category: "web development",
+    category: "web applications",
     technologies: ["React", "Tailwind", "Strapi", "OpenAI", "Clerk","Vite","NeonDB","JavaScript"],
-    githubUrl: "https://github.com/Vikashuvi/AI-Resume" // Add this line
+    githubUrl: "https://github.com/Vikashuvi/AI-Resume",
+    liveUrl: "https://ai-resume-builder.vercel.app/"
   },
   {
     id: 2,
     title: "GDSC WOW Tamil Nadu",
     description: "Developed the official website for GDSC WOW Tamilnadu, one of the largest events in Tamilnadu GDSC's history. The site is built using Tailwind CSS and HTML, focusing on creating a sleek, responsive, and user-friendly experience. It serves as the central hub for all event details, showcasing the event's significance and enhancing user engagement.",
     image: wow,
-    category: "web development",
+    category: "web applications",
     technologies: ["HTML", "CSS", "JavaScript","Tailwind"],
-    githubUrl: "https://github.com/Vikashuvi/Wow-tamilnadu" // Add this line
+    githubUrl: "https://github.com/Vikashuvi/Wow-tamilnadu",
+    liveUrl: "https://gdsc-wow-tn.vercel.app/"
   },
   {
     id: 3,
     title: "Hall Booking System",
     description: "Developed a hall booking system tailored for college management using React, Firebase, and Tailwind CSS. This application streamlines the process of reserving halls for events and meetings, providing a user-friendly interface for easy navigation and bookings. It integrates with Firebase for real-time data management and ensures a responsive, modern design through Tailwind CSS. This system enhances the efficiency of hall reservations within the college.",
     image: hallbooking,
-    category: "web development",
+    category: "web applications",
     technologies: ["React", "Tailwind", "Firebase","JavaScript","CSS"],
-    githubUrl: "https://github.com/Vikashuvi/hall-booking-KSR" // Add this line
+    githubUrl: "https://github.com/Vikashuvi/hall-booking-KSR",
+    liveUrl: "https://hallbooking.ksrce.ac.in/"
   },
-  
+
   {
     id: 4,
     title: "Rescue Net",
@@ -44,7 +48,7 @@ const projects = [
     image: rescue,
     category: "ux/ui design",
     technologies: ["Figma"],
-    
+    prototypeUrl: "https://www.figma.com/proto/oYSvBbKc0jZ75wKPhuOk3f/Rescue-net?node-id=121-292&p=f&t=IbBzUqKyt93MAzwr-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=121%3A292"
   },
 
   {
@@ -54,7 +58,16 @@ const projects = [
     image: boat,
     category: "ux/ui design",
     technologies: ["Figma"],
-    
+    prototypeUrl: "https://www.figma.com/proto/Fw8oFH5eiF9nJX7PTB2HRg/Boat?node-id=1-2&t=Qz5otJTdZjmEuYNh-1"
+  },
+  {
+    id: 6,
+    title: "Craftors",
+    description: "Craftors is a web-based application designed to bridge the gap between local skilled workers and customers in need of on-demand services. The platform connects users with nearby professionals such as plumbers, electricians, mechanics, and carpenters, making it easy to find reliable help in just a few clicks. This project focuses on solving the real-world problem of locating trustworthy service providers quickly and efficiently. Users can explore worker profiles, view availability, check reviews, and book services directly through the application.",
+    image: craft,
+    category: "ux/ui design",
+    technologies: ["Figma"],
+    prototypeUrl: "https://www.figma.com/proto/0h90eM54yqE5QuWrUyzCGF/web-design-Ui?node-id=1-2&t=q4FTrPJBRLQf93My-1"
   },
   // Add more projects as needed
 ];
@@ -84,9 +97,12 @@ const technologyIcons = {
 
 const ProjectCard = ({ project, setOpenModal }) => {
   return (
-    <div className="backdrop-filter backdrop-blur-lg bg-white bg-opacity-10 dark:bg-gray-800 dark:bg-opacity-10 rounded-lg shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700 transition duration-300 hover:shadow-xl">
+    <div
+      className="backdrop-filter backdrop-blur-lg bg-white bg-opacity-10 dark:bg-gray-800 dark:bg-opacity-10 rounded-lg shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700 transition duration-300 hover:shadow-xl cursor-pointer w-full h-full"
+      onClick={() => setOpenModal({ type: 'details', project })}
+    >
       <img src={project.image} alt={project.title} className="w-full h-48 object-cover" />
-      <div className="p-4">
+      <div className="p-4 flex flex-col h-[180px]">
         <h3 className="text-lg font-semibold text-black dark:text-white mb-3">{project.title}</h3>
         <div className="flex flex-wrap gap-2 mb-4">
           {project.technologies.map((tech, index) => {
@@ -100,23 +116,44 @@ const ProjectCard = ({ project, setOpenModal }) => {
             );
           })}
         </div>
-        <div className="flex justify-between">
-          {project.category === 'web development' && (
-            <a 
-              href={project.githubUrl}
+        <div className="flex flex-wrap gap-2 justify-between mt-auto">
+          <div>
+            {project.category === 'web applications' && project.githubUrl && (
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-green-600 text-white px-3 py-1.5 rounded text-sm hover:bg-green-700 transition-colors flex items-center gap-2 shadow-md"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <FaGithub className="text-lg" /> Source Code
+              </a>
+            )}
+          </div>
+
+          {project.category === 'web applications' && project.liveUrl && (
+            <a
+              href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-blue-600 text-white px-3 py-1.5 rounded text-sm hover:bg-blue-700 transition-colors flex items-center gap-2 shadow-md"
+              className="bg-blue-600 text-white px-3 py-1.5 rounded text-sm hover:bg-blue-700 transition-colors flex items-center gap-2 shadow-md ml-auto"
+              onClick={(e) => e.stopPropagation()}
             >
-              <FaGithub className="text-lg" /> Source Code
+              <FaExternalLinkAlt className="text-lg" /> Live Demo
             </a>
           )}
-          <button 
-            onClick={() => setOpenModal({ type: 'details', project })}
-            className="bg-green-600 text-white px-3 py-1.5 rounded text-sm hover:bg-green-700 transition-colors flex items-center gap-2 shadow-md"
-          >
-            Details
-          </button>
+
+          {project.category === 'ux/ui design' && project.prototypeUrl && (
+            <a
+              href={project.prototypeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-purple-600 text-white px-3 py-1.5 rounded text-sm hover:bg-purple-700 transition-colors flex items-center gap-2 shadow-md ml-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <FaExternalLinkAlt className="text-lg" /> Prototype
+            </a>
+          )}
         </div>
       </div>
     </div>
@@ -124,11 +161,11 @@ const ProjectCard = ({ project, setOpenModal }) => {
 };
 
 const Projects = () => {
-  const [toggle, setToggle] = useState('web development');
+  const [toggle, setToggle] = useState('web applications');
   const [modalContent, setModalContent] = useState(null);
   const [filteredProjects, setFilteredProjects] = useState([]);
 
-  const categories = ['web development', 'ux/ui design'];
+  const categories = ['web applications', 'ux/ui design'];
 
   const handleCloseModal = () => {
     setModalContent(null);
@@ -147,7 +184,7 @@ const Projects = () => {
         <h2 className="text-3xl md:text-4xl font-bold text-center text-black dark:text-white mb-4">
           Projects
         </h2>
-        
+
         <div className="flex justify-center mb-8">
           <div className="inline-flex rounded-md shadow-sm" role="group">
             {categories.map((category, index) => (
@@ -173,15 +210,11 @@ const Projects = () => {
             ))}
           </div>
         </div>
-        
-        <div className={`grid ${
-          toggle === 'ux/ui design' 
-            ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-2 justify-items-center' 
-            : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
-        } gap-8`}>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.length > 0 ? (
-            filteredProjects.map((project, index) => (
-              <ProjectCard 
+            filteredProjects.map((project) => (
+              <ProjectCard
                 key={project.id}
                 project={project}
                 setOpenModal={setModalContent}
@@ -207,7 +240,55 @@ const Projects = () => {
                   <img src={modalContent.project.image} alt={modalContent.project.title} className="w-full h-48 object-cover mb-4 rounded" />
                   <h3 className="text-xl font-semibold mb-2 text-black dark:text-white">{modalContent.project.title}</h3>
                   <p className="text-black dark:text-white mb-4">{modalContent.project.description}</p>
-                  {/* Add more project details here */}
+
+                  {/* Links section */}
+                  {/* Web applications links */}
+                  {modalContent.project.category === 'web applications' && (
+                    <div className="flex flex-wrap gap-3 mb-4 justify-between">
+                      <div>
+                        {modalContent.project.githubUrl && (
+                          <a
+                            href={modalContent.project.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="bg-green-600 text-white px-3 py-1.5 rounded text-sm hover:bg-green-700 transition-colors flex items-center gap-2 shadow-md"
+                          >
+                            <FaGithub className="text-lg" /> Source Code
+                          </a>
+                        )}
+                      </div>
+                      <div>
+                        {modalContent.project.liveUrl && (
+                          <a
+                            href={modalContent.project.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="bg-blue-600 text-white px-3 py-1.5 rounded text-sm hover:bg-blue-700 transition-colors flex items-center gap-2 shadow-md"
+                          >
+                            <FaExternalLinkAlt className="text-lg" /> Live Demo
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* UX/UI design links */}
+                  {modalContent.project.category === 'ux/ui design' && (
+                    <div className="flex flex-wrap gap-3 mb-4 justify-end">
+                      <div>
+                        {modalContent.project.prototypeUrl && (
+                          <a
+                            href={modalContent.project.prototypeUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="bg-purple-600 text-white px-3 py-1.5 rounded text-sm hover:bg-purple-700 transition-colors flex items-center gap-2 shadow-md"
+                          >
+                            <FaExternalLinkAlt className="text-lg" /> Prototype
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
               <button
