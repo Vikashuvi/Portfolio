@@ -5,8 +5,12 @@ import wow from "../assets/wow.png";
 import rescue from "../assets/rescue.png";
 import boat from "../assets/boat.png";
 import craft from "../assets/craft.png";
+import shoes from "../assets/shoes.png"; 
+import fest from "../assets/fest.png" 
+import vriksha from "../assets/vriksha.png";
 import { FaReact, FaNodeJs, FaPython, FaVuejs, FaFigma, FaRobot, FaHtml5, FaCss3Alt, FaJs, FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
-import { SiTailwindcss, SiMongodb, SiExpress, SiFirebase, SiStrapi, SiOpenai, SiClerk, SiVite, SiPostgresql, SiVercel } from 'react-icons/si';
+import { SiTailwindcss, SiMongodb, SiExpress, SiFirebase, SiStrapi, SiOpenai, SiClerk, SiVite, SiPostgresql, SiVercel, SiAmazoncognito, SiTypescript,SiAmazondynamodb, SiAmazons3, SiRedux } from 'react-icons/si';
+import { TbBrandThreejs, TbBrandFramerMotion } from 'react-icons/tb';
 
 // Updated projects data
 const projects = [
@@ -68,7 +72,34 @@ const projects = [
     technologies: ["Figma"],
     prototypeUrl: "https://www.figma.com/proto/0h90eM54yqE5QuWrUyzCGF/web-design-Ui?node-id=1-2&t=q4FTrPJBRLQf93My-1"
   },
-  // Add more projects as needed
+  {
+    id: 7,
+    title: "Sibiling Shoes",
+    description: "As a freelancer, I developed a complete e-commerce platform comprising a customer-facing app (Sibiling-Shoes) and an Admin Dashboard. The user app includes pages like Home, Best Sellers, and Product Details, with features like category filtering, responsive design, and cross-device cart sync using AWS DynamoDB and localStorage fallback. Real-time updates are enabled via polling. The admin panel supports full CRUD operations, S3 image uploads, and schema migration tools for DynamoDB management. Both apps utilize AWS Cognito for secure authentication. This project highlights my expertise in full-stack development, AWS integration, and building scalable, cloud-based web applications with real-time capabilities",
+    image: shoes,
+    category: "web applications",
+    technologies: ["React", "Tailwind", "Redux","DynamoDB","TypeScript","Congnito","S3bucket"],
+    liveUrl:"https://sibiling-shoes.vercel.app/"
+  },
+  {
+    id: 8,
+    title: "GDSC Fest",
+    description: "I developed the official website for GDSC FEST '24, an international tech fest organized by Google Developer Student Clubs of KSR Institute of Engineering and Technology. Built using HTML and CSS within a week, the site showcased event details, registration, and schedules for 7+ tech events, 7+ non-tech events, 3 flagship events, workshops, and prizes worth ₹1,00,000.",
+    image: fest ,
+    category: "web applications",
+    technologies: ["HTML", "CSS","JavaScript" ],
+    githubUrl: "https://github.com/Vikashuvi/gdscfest", 
+    liveUrl:"https://gdscfest.netlify.app/"
+  },
+  {
+    id: 9,
+    title: "Vriksha Animation",
+    description: "Version 1 of a modern, futuristic school website designed and developed solely by me for Vriksha, a school located in Tiruchengode. This project showcases a sleek and innovative design, leveraging cutting-edge web technologies to create an engaging and interactive user experience. The website reflects the school's vision and modern approach to education.",
+    image: vriksha,
+    category: "web applications",
+    technologies: ["React", "Tailwind", "Threejs", "GSAP", "FramerMotion" ],
+    liveUrl: "https://vriksha-animation.vercel.app/"
+  }
 ];
 
 const technologyIcons = {
@@ -84,14 +115,21 @@ const technologyIcons = {
   Strapi: SiStrapi,
   OpenAI: SiOpenai,
   Clerk: SiClerk,
-  Gemini: FaRobot, // Using a generic robot icon for AI
+  Gemini: FaRobot, 
   Vite: SiVite,
   HTML: FaHtml5,
   CSS: FaCss3Alt,
   JavaScript: FaJs,
-  NeonDB: SiPostgresql, // Using PostgreSQL icon for NeonDB
-  Vercel: SiVercel, // Adding Vercel icon
-  // Add more technology icons as needed
+  NeonDB: SiPostgresql, 
+  Vercel: SiVercel,
+  DynamoDB: SiAmazondynamodb, 
+  TypeScript: SiTypescript, 
+  Congnito: SiAmazoncognito,
+  S3bucket: SiAmazons3,
+  Redux: SiRedux,
+  Threejs: TbBrandThreejs,
+  FramerMotion: TbBrandFramerMotion,
+
 };
 
 const ProjectCard = ({ project, setOpenModal }) => {
