@@ -8,9 +8,11 @@ import craft from "../assets/craft.png";
 import shoes from "../assets/shoes.png"; 
 import fest from "../assets/fest.png" 
 import vriksha from "../assets/vriksha.png";
-import { FaReact, FaNodeJs, FaPython, FaVuejs, FaFigma, FaRobot, FaHtml5, FaCss3Alt, FaJs, FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
-import { SiTailwindcss, SiMongodb, SiExpress, SiFirebase, SiStrapi, SiOpenai, SiClerk, SiVite, SiPostgresql, SiVercel, SiAmazoncognito, SiTypescript,SiAmazondynamodb, SiAmazons3, SiRedux } from 'react-icons/si';
+import rakapay from "../assets/rakapay.png";
+import { FaReact, FaNodeJs, FaPython, FaVuejs, FaFigma, FaRobot, FaHtml5, FaCss3Alt, FaJs, FaGithub } from 'react-icons/fa';
+import { SiTailwindcss, SiMongodb, SiExpress, SiFirebase, SiStrapi, SiOpenai, SiClerk, SiVite, SiPostgresql, SiVercel, SiAmazoncognito, SiTypescript,SiAmazondynamodb, SiAmazons3, SiRedux, SiFlutter } from 'react-icons/si';
 import { TbBrandThreejs, TbBrandFramerMotion } from 'react-icons/tb';
+import { IoIosLink } from "react-icons/io";
 
 // Updated projects data
 const projects = [
@@ -99,6 +101,15 @@ const projects = [
     category: "web applications",
     technologies: ["React", "Tailwind", "Threejs", "GSAP", "FramerMotion" ],
     liveUrl: "https://vriksha-animation.vercel.app/"
+  },
+  {
+    id: 10,
+    title: "Rakapay",
+    description: "Built a cross-platform bus ticketing and management application using Flutter, supporting Android, iOS, Web, Windows, and Linux, with role-based interfaces for Customers, Agents, and Admins. Integrated QR code scanning for real-time ticket validation, and used Firebase services (Firestore, Authentication) for secure data handling, user management, and real-time updates. Designed features like commission tracking, penalty management, and multilingual support (English & French), creating a scalable system with clear separation of concerns and seamless UX across user roles.",
+    image: rakapay,
+    category: "mobile applications",
+    technologies: ["Flutter", "Firebase"],
+    apkUrl: "https://drive.google.com/file/d/1t9CPf7j1SPGyVmbRfg4zeDCCzjxcGbSl/view"
   }
 ];
 
@@ -129,6 +140,7 @@ const technologyIcons = {
   Redux: SiRedux,
   Threejs: TbBrandThreejs,
   FramerMotion: TbBrandFramerMotion,
+  Flutter: SiFlutter 
 
 };
 
@@ -176,7 +188,7 @@ const ProjectCard = ({ project, setOpenModal }) => {
               className="bg-blue-600 text-white px-3 py-1.5 rounded text-sm hover:bg-blue-700 transition-colors flex items-center gap-2 shadow-md ml-auto"
               onClick={(e) => e.stopPropagation()}
             >
-              <FaExternalLinkAlt className="text-lg" /> Live Demo
+              <IoIosLink className="text-lg" /> Live Demo
             </a>
           )}
 
@@ -188,7 +200,19 @@ const ProjectCard = ({ project, setOpenModal }) => {
               className="bg-purple-600 text-white px-3 py-1.5 rounded text-sm hover:bg-purple-700 transition-colors flex items-center gap-2 shadow-md ml-auto"
               onClick={(e) => e.stopPropagation()}
             >
-              <FaExternalLinkAlt className="text-lg" /> Prototype
+              <IoIosLink className="text-lg" /> Prototype
+            </a>
+          )}
+
+          {project.category === 'mobile applications' && project.apkUrl && (
+            <a
+              href={project.apkUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-orange-600 text-white px-3 py-1.5 rounded text-sm hover:bg-orange-700 transition-colors flex items-center gap-2 shadow-md ml-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <IoIosLink className="text-lg" /> APK Download
             </a>
           )}
         </div>
@@ -202,7 +226,7 @@ const Projects = () => {
   const [modalContent, setModalContent] = useState(null);
   const [filteredProjects, setFilteredProjects] = useState([]);
 
-  const categories = ['web applications', 'ux/ui design'];
+  const categories = ['web applications', 'ux/ui design', 'mobile applications'];
 
   const handleCloseModal = () => {
     setModalContent(null);
@@ -302,7 +326,7 @@ const Projects = () => {
                             rel="noopener noreferrer"
                             className="bg-blue-600 text-white px-3 py-1.5 rounded text-sm hover:bg-blue-700 transition-colors flex items-center gap-2 shadow-md"
                           >
-                            <FaExternalLinkAlt className="text-lg" /> Live Demo
+                            <IoIosLink className="text-lg" /> Live Demo
                           </a>
                         )}
                       </div>
@@ -320,7 +344,25 @@ const Projects = () => {
                             rel="noopener noreferrer"
                             className="bg-purple-600 text-white px-3 py-1.5 rounded text-sm hover:bg-purple-700 transition-colors flex items-center gap-2 shadow-md"
                           >
-                            <FaExternalLinkAlt className="text-lg" /> Prototype
+                            <IoIosLink className="text-lg" /> Prototype
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Mobile applications links */}
+                  {modalContent.project.category === 'mobile applications' && (
+                    <div className="flex flex-wrap gap-3 mb-4 justify-end">
+                      <div>
+                        {modalContent.project.apkUrl && (
+                          <a
+                            href={modalContent.project.apkUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="bg-orange-600 text-white px-3 py-1.5 rounded text-sm hover:bg-orange-700 transition-colors flex items-center gap-2 shadow-md"
+                          >
+                            <IoIosLink className="text-lg" /> APK Download
                           </a>
                         )}
                       </div>
